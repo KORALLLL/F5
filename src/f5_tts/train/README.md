@@ -10,23 +10,6 @@ If not found, install it first (or skip assuming you know of other backends avai
 
 Example data processing scripts, and you may tailor your own one along with a Dataset class in `src/f5_tts/model/dataset.py`.
 
-### 1. Some specific Datasets preparing scripts
-Download corresponding dataset first, and fill in the path in scripts.
-
-```bash
-# Prepare the Emilia dataset
-python src/f5_tts/train/datasets/prepare_emilia.py
-
-# Prepare the Wenetspeech4TTS dataset
-python src/f5_tts/train/datasets/prepare_wenetspeech4tts.py
-
-# Prepare the LibriTTS dataset
-python src/f5_tts/train/datasets/prepare_libritts.py
-
-# Prepare the LJSpeech dataset
-python src/f5_tts/train/datasets/prepare_ljspeech.py
-```
-
 ### 2. Create custom dataset with metadata.csv
 Use guidance see [#57 here](https://github.com/SWivid/F5-TTS/discussions/57#discussioncomment-10959029).
 
@@ -51,17 +34,6 @@ accelerate launch src/f5_tts/train/train.py --config-name F5TTS_v1_Base.yaml
 # possible to overwrite accelerate and hydra config
 accelerate launch --mixed_precision=fp16 src/f5_tts/train/train.py --config-name F5TTS_v1_Base.yaml ++datasets.batch_size_per_gpu=19200
 ```
-
-### 2. Finetuning practice
-Discussion board for Finetuning [#57](https://github.com/SWivid/F5-TTS/discussions/57).
-
-Gradio UI training/finetuning with `src/f5_tts/train/finetune_gradio.py` see [#143](https://github.com/SWivid/F5-TTS/discussions/143).
-
-If want to finetune with a variant version e.g. *F5TTS_v1_Base_no_zero_init*, manually download pretrained checkpoint from model weight repository and fill in the path correspondingly on web interface.
-
-If use tensorboard as logger, install it first with `pip install tensorboard`.
-
-<ins>The `use_ema = True` might be harmful for early-stage finetuned checkpoints</ins> (which goes just few updates, thus ema weights still dominated by pretrained ones), try turn it off with finetune gradio option or `load_model(..., use_ema=False)`, see if offer better results.
 
 ### 3. W&B Logging
 

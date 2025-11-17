@@ -56,7 +56,9 @@ See [detailed instructions](src/f5_tts/runtime/triton_trtllm/README.md) for more
 Refer to [training & finetuning guidance](src/f5_tts/train) for best practice.
 
 
-Read [training & finetuning guidance](src/f5_tts/train) for more instructions.
-
 
 ## [Evaluation](src/f5_tts/eval)
+## TODO
+
+- [ ] ADD: SimAMResNet34
+- [ ] Evaluation
