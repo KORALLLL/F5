@@ -1,10 +1,13 @@
 # training script.
 
-import os
+import os, sys, warnings
+warnings.filterwarnings("ignore")
 from importlib.resources import files
 
 import hydra
 from omegaconf import OmegaConf
+
+sys.path.append(os.getcwd())
 
 from f5_tts.model import CFM, Trainer
 from f5_tts.model.dataset import load_dataset
@@ -65,7 +68,7 @@ def main(model_cfg):
         model_cfg_dict=OmegaConf.to_container(model_cfg, resolve=True),
     )
 
-    train_dataset = load_dataset(model_cfg.datasets.name, tokenizer, mel_spec_kwargs=model_cfg.model.mel_spec)
+    train_dataset = load_dataset(model_cfg.datasets.name, tokenizer, dataset_type="CustomDatasetPath", mel_spec_kwargs=model_cfg.model.mel_spec)
     trainer.train(
         train_dataset,
         num_workers=model_cfg.datasets.num_workers,
